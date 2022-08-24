@@ -37,5 +37,23 @@ export class HomePage implements OnInit {
       testingDevices: ['2077ef9a63d2b398840261c8221a0c9b'],
       initializeForTesting: true,
     });
+
+    AdMob.addListener(BannerAdPluginEvents.Loaded, () => {
+      // Subscribe Banner Event Listener
+    });
+
+    AdMob.addListener(BannerAdPluginEvents.SizeChanged, (size: AdMobBannerSize) => {
+      // Subscribe Change Banner Size
+    });
+
+    const options: BannerAdOptions = {
+      adId: 'ca-app-pub-3806254277644640/7706117825',
+      adSize: BannerAdSize.BANNER,
+      position: BannerAdPosition.BOTTOM_CENTER,
+      margin: 0,
+      // isTesting: true
+      // npa: true
+    };
+    AdMob.showBanner(options);
   }
 }
