@@ -1,5 +1,7 @@
 {
   "name": "ForgivenessCalculator",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular"
 }
