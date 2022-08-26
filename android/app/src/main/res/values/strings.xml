@@ -4,5 +4,4 @@
     <string name="title_activity_main">ForgivenessCalculator</string>
     <string name="package_name">com.forgiveness.calculator</string>
     <string name="custom_url_scheme">com.forgiveness.calculator</string>
-    <string name="admob_app_id">ca-app-pub-3806254277644640~9307808255</string>
 </resources>

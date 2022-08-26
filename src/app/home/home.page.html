@@ -1,20 +1,227 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
+    <!-- <ion-title>
       Blank
-    </ion-title>
+    </ion-title> -->
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div>
+		<h1>
+			ForegivenessCalculator.com
+		</h1>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+		<table>
+			
+			<!-- Header -->
+			<!--
+			<tr class="header">
+				<td>
+					<span>Key</span>
+				</td>
+				<td>
+					<span>Variable</span>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<span>Source</span>
+				</td>
+				<td>
+					<span>Value</span>
+				</td>
+			</tr>
+			-->
+			
+			<!-- input: total amount of student loan forgiveness for your household -->
+			<tr class="row-label">
+				<td>
+					<span class="letter">A</span><span>total amount of forgiveness for your household</span>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<span class="dollar">$</span><input id="A" [(ngModel)]="inputA" (input)="onChangeB()" type="number" value="10000">
+				</td>
+			</tr>
+
+			<!-- input: annual household income -->
+			<tr class="row-label">
+				<td>
+					<span class="letter">B</span><span>annual household income</span>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<span class="dollar">$</span><input id="B" [(ngModel)]="inputB" (input)="onChangeB()" type="number" value="60000">
+					<div>
+            <input id="married" [(ngModel)]="marriedCheckbox" (change)="onChangeB()" style="width: 20px; margin-left: 18px; vertical-align: text-top" type=checkbox><span style="font-size: 0.8em; margin-top: -2px;">Married filling jointly</span>
+          </div>
+				</td>
+			</tr>
+
+			<!-- calculated: federal income tax rate -->
+			<tr class="source-data row-label" *ngIf="showSourceData">
+				<td>
+					<span class="letter">C</span><span>federal income tax rate</span>
+				</td>
+			</tr>
+			<tr class="source-data" *ngIf="showSourceData">
+				<td>
+					<input id="C" [(ngModel)]="inputC" type="number"><span class="percent">%</span><a target="link" class="external-link" href="https://www.bankrate.com/taxes/tax-brackets/">(bankrate.com)</a>
+				</td>
+			</tr>
+
+			<!-- fact: average household income -->
+			<tr class="source-data row-label" *ngIf="showSourceData">
+				<td>
+					<span class="letter">D</span><a target="link" class="google" href="https://www.google.com/search?q=average+household+income+us">average household income</a>
+				</td>
+			</tr>
+			<tr class="source-data" *ngIf="showSourceData">
+				<td>
+					<span class="number">#</span><input id="D" [(ngModel)]="inputD" type="number" value="67521" disabled><a target="link" class="external-link" href="https://www.census.gov/library/publications/2021/demo/p60-273.html#:~:text=Median%20household%20income%20was%20%2467%2C521,median%20household%20income%20since%202011.">(census.gov)</a>
+				</td>
+			</tr>
+
+			<!-- fact: average household tax rate -->
+			<tr class="source-data row-label" *ngIf="showSourceData">
+				<td>
+					<span class="letter">E</span><a target="link" class="google" href="https://www.google.com/search?q=average+household+tax+rate">average household tax rate</a>
+				</td>
+			</tr>
+			<tr class="source-data" *ngIf="showSourceData">
+				<td>
+					<input id="E" [(ngModel)]="inputE" type="number" value="22.6" disabled><span class="percent">%</span><a target="link" class="external-link" href="https://www.oecd.org/unitedstates/taxing-wages-united-states.pdf">(oecd.org)</a>
+				</td>
+			</tr>
+
+			<!-- fact: number of households -->
+			<tr class="source-data row-label" *ngIf="showSourceData">
+				<td>
+					<span class="letter">F</span><a target="link" class="google" href="https://www.google.com/search?q=number+of+households+us">number of households</a>
+				</td>
+			</tr>
+			<tr class="source-data" *ngIf="showSourceData">
+				<td>
+					<span class="number">#</span><input id="F" [(ngModel)]="inputF" value="122,354,219" disabled><a target="link" class="external-link" href="https://www.census.gov/quickfacts/fact/table/US/HSD410220">(census.gov)</a>
+				</td>
+			</tr>
+
+			<!-- fact: percent of households that pay income tax -->
+			<tr class="source-data row-label" *ngIf="showSourceData">
+				<td>
+					<span class="letter">G</span><a target="link" class="google" href="https://www.google.com/search?q=percent+of+households+that+pay+income+tax">percent of households that pay income tax</a>
+				</td>
+			</tr>
+			<tr class="source-data" *ngIf="showSourceData">
+				<td>
+					<input id="G" [(ngModel)]="inputG" type="number" value="42.9" disabled><span class="percent">%</span><a target="link" class="external-link" href="https://www.statista.com/statistics/242138/percentages-of-us-households-that-pay-no-income-tax-by-income-level/#:~:text=In%20total%2C%20about%2042.9%20percent,paid%20income%20tax%20in%202021.">(statista.com)</a>
+				</td>
+			</tr>
+
+			<!-- calculation: number of households that pay income tax -->
+			<tr class="source-data row-label" *ngIf="showSourceData">
+				<td>
+					<span class="letter">H</span><span>number of households that pay income tax</span>
+				</td>
+			</tr>
+			<tr class="source-data" *ngIf="showSourceData">
+				<td>
+					<span class="number">#</span><input id="H" [(ngModel)]="inputH" value="" disabled><span class="formula">= F * G</span>
+				</td>
+			</tr>
+
+			<!-- fact: total cost of forgiveness package to taxpayers -->
+			<tr class="source-data row-label" *ngIf="showSourceData">
+				<td>
+					<span class="letter">I</span><a target="link" class="google" href="https://www.google.com/search?q=student+loan+forgiveness+cost+to+taxpayers">total cost of forgiveness package to taxpayers</a>
+				</td>
+			</tr>
+			<tr class="source-data" *ngIf="showSourceData">
+				<td>
+					<span class="dollar">$</span><input id="I" [(ngModel)]="inputI" value="321,000,000,000" disabled><a target="link" class="external-link" href="https://www.cnbc.com/2022/08/24/bidens-student-loan-forgiveness-may-cost-taxpayers-prompt-inflation.html">(cnbc.com)</a>
+				</td>
+			</tr>
+
+			<!-- fact: average cost per household that pays tax -->
+			<tr class="source-data row-label" *ngIf="showSourceData">
+				<td>
+					<span class="letter">J</span><span>average cost per household that pays tax</span>
+				</td>
+			</tr>
+			<tr class="source-data" *ngIf="showSourceData">
+				<td>
+					<span class="dollar">$</span><input id="J" [(ngModel)]="inputJ" type="number" disabled><span class="formula">= I / H</span>
+				</td>
+			</tr>
+
+			<!-- calculated: your income / average -->
+			<tr class="source-data row-label" *ngIf="showSourceData">
+				<td>
+					<span class="letter">K</span><span>your income / average</span>
+				</td>
+			</tr>
+			<tr class="source-data" *ngIf="showSourceData">
+				<td>
+					<span class="x">X</span><input id="K" [(ngModel)]="inputK"  type="number" disabled><span class="formula">= B / D</span>
+				</td>
+			</tr>
+
+			<!-- calculated: total cost of forgiveness package for your household -->
+			<tr class="source-data row-label" *ngIf="showSourceData">
+				<td colspan="2">
+					<span class="letter">L</span><span>total cost of forgiveness package for your household</span>
+				</td>
+			</tr>
+			<tr class="source-data" *ngIf="showSourceData">
+				<td>
+					<span class="dollar">$</span><input id="L" [(ngModel)]="inputL" type="number" disabled><span class="formula">= (J * K) * (C / E)</span>
+				</td>
+			</tr>
+
+			<!-- calculated: net benefit or cost for your household -->
+			<tr class="output row-label">
+				<td>
+					<span class="letter">M</span><span>net benefit or cost for your household</span>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<span class="dollar">$</span><input id="M" [(ngModel)]="inputM" type="number" disabled><span class="formula source-data" *ngIf="showSourceData">= A - L</span>
+				</td>
+			</tr>
+			
+		</table>
+
+		<!--
+		<button class="button button-blue" onclick="calculate()">
+			Calculate
+		</button>
+
+		<button class="button button-gray" onclick="reset()">
+			Reset
+		</button>
+		-->
+		
+		<button class="button button-blue" style="margin-top: 20px" (click)="showSourceData = !showSourceData">
+			<span *ngIf="!showSourceData">Show Formulas and Sources</span>
+      <span *ngIf="showSourceData">Hide Formulas and Sources</span>
+		</button>
+
+		<h2>
+			Disclaimers and Comments
+		</h2>
+		<ul>
+			<li style="color: white;">We <b>do not use cookies</b>, we have <b>no interest in your name, email address, phone number</b> or anything that could be used to identify you.</li>
+			<li style="color: white;">The forgiveness package will be annualized over 10 years (source).</li>
+			<li style="color: white;">For simplicity, the calculations and totals are based on current values in a single year.</li>
+			<li style="color: white;">Many other factors may apply to every individual situation.</li>
+			<li style="color: white;">The final calculated value is approximate, simplistically based on the Sources and Logic included above.</li>
+			<li style="color: white;">This was built by a couple of nerds who like math, and thought this might be informative.</li>
+			<li style="color: white;">Your future Tax Rates or Amounts may not reflect an increase directly attributable to the total.</li>
+			<li style="color: white;">Costs may be sourced from taxes other than Personal Income tax (i.e. Corporate Income, which in turn may impact cost of goods or pay rates, considered statistical proportional to personal income).</li>
+		</ul>
+	</div>
 </ion-content>
