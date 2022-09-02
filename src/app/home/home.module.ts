@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
+import { AdsenseModule } from 'ng2-adsense';
 
 
 @NgModule({
@@ -12,7 +13,10 @@ import { HomePageRoutingModule } from './home-routing.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    HomePageRoutingModule
+    HomePageRoutingModule,
+    AdsenseModule.forRoot({
+      adClient: 'ca-pub-3806254277644640', //TODO add adSlot: SLOT_HERE,
+    })
   ],
   declarations: [HomePage]
 })

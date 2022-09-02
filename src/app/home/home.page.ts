@@ -1,5 +1,6 @@
 //Angular imports
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { IonModal } from '@ionic/angular';
 
 //External imports
 
@@ -9,7 +10,9 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage implements OnInit, AfterViewInit {
+export class HomePage implements OnInit {
+  isModalOpen = false;
+
   //input variables
   marriedCheckbox = false;
   inputA = 10000;
@@ -36,24 +39,11 @@ export class HomePage implements OnInit, AfterViewInit {
   async ngOnInit() {
     this.updateH();
 	  this.updateJ();
-
-    // document.getElementById('B').addEventListener('input', this.updateC);
-    // document.getElementById('married').addEventListener('input', this.updateC);
-
-    // document.getElementById('A').addEventListener('input', this.calculate);
-    // document.getElementById('B').addEventListener('input', this.calculate);
-    // document.getElementById('married').addEventListener('input', this.calculate);
   }
 
-  async ngAfterViewInit() {
-    //document.getElementById("C").addEventListener('input', calculate);
-
+  setOpen(isOpen: boolean) {
+    this.isModalOpen = isOpen;
   }
-
-  // replaceAll(search, replacement) {
-  //   const target = this;
-  //   return target.split(search).join(replacement);
-  // };
 
 	numberWithCommas(x) {
 		return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',');

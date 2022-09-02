@@ -1,13 +1,158 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <!-- <ion-title>
-      Blank
-    </ion-title> -->
-  </ion-toolbar>
-</ion-header>
+<div class="h-full w-full bg-white overflow-y-scroll">
+  <ng-adsense
+  [adClient]="'ca-pub-3806254277644640'"></ng-adsense>
 
-<ion-content [fullscreen]="true">
-  <div>
+
+  <form class="mt-8 space-y-8 divide-y divide-gray-200 px-20">
+    <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
+      
+      <div class="space-y-6 pt-8 sm:space-y-5 sm:pt-10">
+        <div>
+          <h3 class="text-3xl font-medium leading-6 text-gray-900">Forgiveness Calculator</h3>
+          <p class="mt-1 max-w-2xl text-sm text-gray-500">Use the form below to calculate your net gain or loss by taking student loan forgiveness.</p>
+        </div>
+        <div class="space-y-6 sm:space-y-5">
+          <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+            <label for="inputA" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">Total household forgiveness amount</label>
+            <div class="mt-1 sm:col-span-2 sm:mt-0">
+              <input type="number" name="inputA" id="A" [(ngModel)]="inputA" (input)="onChangeB()" class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-primary-default focus:ring-primary-default sm:max-w-xs sm:text-sm text-dark-default">
+            </div>
+          </div>
+  
+          <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+            <label for="inputB" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">Annual household income</label>
+            <div class="mt-1 sm:col-span-2 sm:mt-0">
+              <input type="number" name="inputB" id="B" [(ngModel)]="inputB" (input)="onChangeB()" class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-primary-default focus:ring-primary-default sm:max-w-xs sm:text-sm text-dark-default">
+            </div>
+          </div>
+
+          <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+            <label for="married-jointly" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">Married filing jointly</label>
+            <div class="mt-1 sm:col-span-2 sm:mt-0">
+              <ion-toggle name="married" id="married" [(ngModel)]="marriedCheckbox" (ionChange)="onChangeB()"></ion-toggle>
+            </div>
+          </div>
+  
+          <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5" *ngIf="showSourceData">
+            <label for="inputC" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">Federal income tax rate</label>
+            <div class="mt-1 sm:col-span-2 sm:mt-0">
+              <input type="number" name="inputC" id="C" [(ngModel)]="inputC" class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-primary-default focus:ring-primary-default sm:max-w-xs sm:text-sm text-dark-default">
+            </div>
+          </div>
+  
+          <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5" *ngIf="showSourceData">
+            <label for="inputD" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">Average household income</label>
+            <div class="mt-1 sm:col-span-2 sm:mt-0">
+              <input type="number" name="inputD" id="D" [(ngModel)]="inputD" class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-primary-default focus:ring-primary-default sm:max-w-xs sm:text-sm text-dark-default">
+            </div>
+          </div>
+  
+          <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5" *ngIf="showSourceData">
+            <label for="inputE" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">Average household tax rate</label>
+            <div class="mt-1 sm:col-span-2 sm:mt-0">
+              <input type="number" name="inputE" id="E" [(ngModel)]="inputE" class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-primary-default focus:ring-primary-default sm:max-w-xs sm:text-sm text-dark-default">
+            </div>
+          </div>
+  
+          <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5" *ngIf="showSourceData">
+            <label for="inputF" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">Number of households</label>
+            <div class="mt-1 sm:col-span-2 sm:mt-0">
+              <input type="number" name="inputF" id="F" [(ngModel)]="inputF" class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-primary-default focus:ring-primary-default sm:max-w-xs sm:text-sm text-dark-default">
+            </div>
+          </div>
+  
+          <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5" *ngIf="showSourceData">
+            <label for="inputG" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">% of income tax paying households</label>
+            <div class="mt-1 sm:col-span-2 sm:mt-0">
+              <input type="number" name="inputG" id="G" [(ngModel)]="inputG" class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-primary-default focus:ring-primary-default sm:max-w-xs sm:text-sm text-dark-default">
+            </div>
+          </div>
+
+          <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5" *ngIf="showSourceData">
+            <label for="inputH" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"># of income tax paying households</label>
+            <div class="mt-1 sm:col-span-2 sm:mt-0">
+              <input type="number" name="inputH" id="H" [(ngModel)]="inputH" class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-primary-default focus:ring-primary-default sm:max-w-xs sm:text-sm text-dark-default">
+            </div>
+          </div>
+
+          <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5" *ngIf="showSourceData">
+            <label for="inputI" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">Cost of forgiveness package to taxpayers</label>
+            <div class="mt-1 sm:col-span-2 sm:mt-0">
+              <input type="number" name="inputI" id="I" [(ngModel)]="inputI" class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-primary-default focus:ring-primary-default sm:max-w-xs sm:text-sm text-dark-default">
+            </div>
+          </div>
+
+          <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5" *ngIf="showSourceData">
+            <label for="inputJ" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">Average cost per tax paying household</label>
+            <div class="mt-1 sm:col-span-2 sm:mt-0">
+              <input type="number" name="inputJ" id="J" [(ngModel)]="inputJ" class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-primary-default focus:ring-primary-default sm:max-w-xs sm:text-sm text-dark-default">
+            </div>
+          </div>
+
+          <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5" *ngIf="showSourceData">
+            <label for="inputK" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">Your income / average</label>
+            <div class="mt-1 sm:col-span-2 sm:mt-0">
+              <input type="number" name="inputK" id="K" [(ngModel)]="inputK" class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-primary-default focus:ring-primary-default sm:max-w-xs sm:text-sm text-dark-default">
+            </div>
+          </div>
+
+          <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5" *ngIf="showSourceData">
+            <label for="inputL" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">Your household total cost of forgiveness package</label>
+            <div class="mt-1 sm:col-span-2 sm:mt-0">
+              <input type="number" name="inputL" id="L" [(ngModel)]="inputL" class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-primary-default focus:ring-primary-default sm:max-w-xs sm:text-sm text-dark-default">
+            </div>
+          </div>
+
+          <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+            <label for="inputM" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">Net benefit or cost for your household</label>
+            <div class="mt-1 sm:col-span-2 sm:mt-0">
+              <input type="number" name="inputM" id="M" [(ngModel)]="inputM" class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-primary-default focus:ring-primary-default sm:max-w-xs sm:text-sm text-dark-default">
+            </div>
+          </div>
+        </div>
+      </div>
+  
+    </div>
+  
+    <div class="py-5">
+      <div class="flex justify-between items-center">
+        <p (click)="setOpen(true)" class="text-sm text-slate-400 cursor-pointer">Show Disclaimers</p>
+        <button type="button" (click)="showSourceData = !showSourceData" class="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary-default focus:ring-offset-2">
+          <span *ngIf="!showSourceData" class="text-sm">Show Formulas</span>
+          <span *ngIf="showSourceData" class="text-sm">Hide Formulas</span>
+        </button>
+        <ion-modal [isOpen]="isModalOpen">
+          <ng-template>
+            <ion-header>
+              <ion-toolbar>
+                <ion-title>Disclaimers</ion-title>
+                <ion-buttons slot="end">
+                  <ion-button (click)="setOpen(false)" style="font-size: 18px">Close</ion-button>
+                </ion-buttons>
+              </ion-toolbar>
+            </ion-header>
+            <ion-content class="ion-padding" style="display: flex; justify-content: center; align-items: center;">
+              <div style="width: 100%; height: 100%; padding: 16px;">
+                <ul>
+                  <li style="color: white; font-size: 14px; margin-bottom: 8px;">- We <b>do not use cookies</b>, we have <b>no interest in your name, email address, phone number</b> or anything that could be used to identify you.</li>
+                  <li style="color: white; font-size: 14px; margin-bottom: 8px;">- The forgiveness package will be annualized over 10 years (source).</li>
+                  <li style="color: white; font-size: 14px; margin-bottom: 8px;">- For simplicity, the calculations and totals are based on current values in a single year.</li>
+                  <li style="color: white; font-size: 14px; margin-bottom: 8px;">- Many other factors may apply to every individual situation.</li>
+                  <li style="color: white; font-size: 14px; margin-bottom: 8px;">- The final calculated value is approximate, simplistically based on the Sources and Logic included above.</li>
+                  <li style="color: white; font-size: 14px; margin-bottom: 8px;">- This was built by a couple of nerds who like math, and thought this might be informative.</li>
+                  <li style="color: white; font-size: 14px; margin-bottom: 8px;">- Your future Tax Rates or Amounts may not reflect an increase directly attributable to the total.</li>
+                  <li style="color: white; font-size: 14px; margin-bottom: 8px;">- Costs may be sourced from taxes other than Personal Income tax (i.e. Corporate Income, which in turn may impact cost of goods or pay rates, considered statistical proportional to personal income).</li>
+                </ul>
+              </div>
+            </ion-content>
+          </ng-template>
+        </ion-modal>
+      </div>
+    </div>
+  </form>
+
+
+  <!-- <div class="bg-dark-default">
 		<h1>
 			ForegivenessCalculator.com
 		</h1>
@@ -34,7 +179,7 @@
 			</tr>
 			-->
 			
-			<!-- input: total amount of student loan forgiveness for your household -->
+			<!-- input: total amount of student loan forgiveness for your household --
 			<tr class="row-label">
 				<td>
 					<span class="letter">A</span><span>total amount of forgiveness for your household</span>
@@ -46,7 +191,7 @@
 				</td>
 			</tr>
 
-			<!-- input: annual household income -->
+			<!-- input: annual household income --
 			<tr class="row-label">
 				<td>
 					<span class="letter">B</span><span>annual household income</span>
@@ -61,7 +206,7 @@
 				</td>
 			</tr>
 
-			<!-- calculated: federal income tax rate -->
+			<!-- calculated: federal income tax rate --
 			<tr class="source-data row-label" *ngIf="showSourceData">
 				<td>
 					<span class="letter">C</span><span>federal income tax rate</span>
@@ -73,7 +218,7 @@
 				</td>
 			</tr>
 
-			<!-- fact: average household income -->
+			<!-- fact: average household income --
 			<tr class="source-data row-label" *ngIf="showSourceData">
 				<td>
 					<span class="letter">D</span><a target="link" class="google" href="https://www.google.com/search?q=average+household+income+us">average household income</a>
@@ -85,7 +230,7 @@
 				</td>
 			</tr>
 
-			<!-- fact: average household tax rate -->
+			<!-- fact: average household tax rate --
 			<tr class="source-data row-label" *ngIf="showSourceData">
 				<td>
 					<span class="letter">E</span><a target="link" class="google" href="https://www.google.com/search?q=average+household+tax+rate">average household tax rate</a>
@@ -97,7 +242,7 @@
 				</td>
 			</tr>
 
-			<!-- fact: number of households -->
+			<!-- fact: number of households --
 			<tr class="source-data row-label" *ngIf="showSourceData">
 				<td>
 					<span class="letter">F</span><a target="link" class="google" href="https://www.google.com/search?q=number+of+households+us">number of households</a>
@@ -109,7 +254,7 @@
 				</td>
 			</tr>
 
-			<!-- fact: percent of households that pay income tax -->
+			<!-- fact: percent of households that pay income tax --
 			<tr class="source-data row-label" *ngIf="showSourceData">
 				<td>
 					<span class="letter">G</span><a target="link" class="google" href="https://www.google.com/search?q=percent+of+households+that+pay+income+tax">percent of households that pay income tax</a>
@@ -121,7 +266,7 @@
 				</td>
 			</tr>
 
-			<!-- calculation: number of households that pay income tax -->
+			<!-- calculation: number of households that pay income tax --
 			<tr class="source-data row-label" *ngIf="showSourceData">
 				<td>
 					<span class="letter">H</span><span>number of households that pay income tax</span>
@@ -133,7 +278,7 @@
 				</td>
 			</tr>
 
-			<!-- fact: total cost of forgiveness package to taxpayers -->
+			<!-- fact: total cost of forgiveness package to taxpayers --
 			<tr class="source-data row-label" *ngIf="showSourceData">
 				<td>
 					<span class="letter">I</span><a target="link" class="google" href="https://www.google.com/search?q=student+loan+forgiveness+cost+to+taxpayers">total cost of forgiveness package to taxpayers</a>
@@ -145,7 +290,7 @@
 				</td>
 			</tr>
 
-			<!-- fact: average cost per household that pays tax -->
+			<!-- fact: average cost per household that pays tax --
 			<tr class="source-data row-label" *ngIf="showSourceData">
 				<td>
 					<span class="letter">J</span><span>average cost per household that pays tax</span>
@@ -157,7 +302,7 @@
 				</td>
 			</tr>
 
-			<!-- calculated: your income / average -->
+			<!-- calculated: your income / average --
 			<tr class="source-data row-label" *ngIf="showSourceData">
 				<td>
 					<span class="letter">K</span><span>your income / average</span>
@@ -169,7 +314,7 @@
 				</td>
 			</tr>
 
-			<!-- calculated: total cost of forgiveness package for your household -->
+			<!-- calculated: total cost of forgiveness package for your household --
 			<tr class="source-data row-label" *ngIf="showSourceData">
 				<td colspan="2">
 					<span class="letter">L</span><span>total cost of forgiveness package for your household</span>
@@ -181,7 +326,7 @@
 				</td>
 			</tr>
 
-			<!-- calculated: net benefit or cost for your household -->
+			<!-- calculated: net benefit or cost for your household --
 			<tr class="output row-label">
 				<td>
 					<span class="letter">M</span><span>net benefit or cost for your household</span>
@@ -203,7 +348,7 @@
 		<button class="button button-gray" onclick="reset()">
 			Reset
 		</button>
-		-->
+    --
 		
 		<button class="button button-blue" style="margin-top: 20px" (click)="showSourceData = !showSourceData">
 			<span *ngIf="!showSourceData">Show Formulas and Sources</span>
@@ -223,5 +368,5 @@
 			<li style="color: white;">Your future Tax Rates or Amounts may not reflect an increase directly attributable to the total.</li>
 			<li style="color: white;">Costs may be sourced from taxes other than Personal Income tax (i.e. Corporate Income, which in turn may impact cost of goods or pay rates, considered statistical proportional to personal income).</li>
 		</ul>
-	</div>
-</ion-content>
+	</div> -->
+</div>
