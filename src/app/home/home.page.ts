@@ -37,17 +37,20 @@ export class HomePage implements OnInit {
   }
 
   async ngOnInit() {
-    this.updateH();
-	  this.updateJ();
+    await this.updateH().then(async () => {
+		await this.updateJ().then(async () => {
+			await this.onChangeB();
+		});
+	});
   }
 
   setOpen(isOpen: boolean) {
     this.isModalOpen = isOpen;
   }
 
-	numberWithCommas(x) {
-		return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',');
-	}
+	// numberWithCommas(x) {
+	// 	return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',');
+	// }
 
   async onChangeB() {
     await this.updateC().then(() => {
@@ -88,11 +91,11 @@ export class HomePage implements OnInit {
     return;
 	}
 
-	updateH() {
+	async updateH() {
 		this.inputH = this.inputF * (this.inputG * 0.01);
 	}
 
-	updateJ() {
+	async updateJ() {
 		const j = this.inputI / this.inputH;
 
 		this.inputJ = Number(j.toFixed(0));
